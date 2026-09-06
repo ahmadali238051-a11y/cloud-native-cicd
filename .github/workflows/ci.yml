@@ -37,4 +37,5 @@ jobs:
         - name: Tag docker image
           run: docker tag cloud-native-cicd:local ${{ secrets.DOCKERHUB_USERNAME }}/cloud-native-cicd:local
         - name: Push to Docker Hub
-          run: docker push ${{secrets.DOCKERHUB_USERNAME}}/cloud-native-cicd:local
+          run: |
+            docker push cloud-native-cicd:local ${{ secrets.DOCKERHUB_USERNAME }}/cloud-native-cicd:local
