@@ -49,7 +49,7 @@ jobs:
         uses:  aws-actions/configure-aws-credentials@v5
         with:
            role-to-assume: arn:aws:iam::155936381999:role/docker-ecr-role
-           region: us-east-1
+           aws-region: us-east-1
       # 8. Login to ECR
       - name: Login to ECR
         uses: aws-actions/amazon-ecr-login@v2
