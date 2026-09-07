@@ -46,8 +46,9 @@ jobs:
 
       # 7. Tag image for Docker Hub
       - name: Tag Docker Image
-        run: docker tag cloud-native-cicd:local ${{ secrets.DOCKERHUB_USERNAME }}/cloud-native-cicd:local
+        run: docker tag cloud-native-cicd:local ${{ secrets.DOCKERHUB_USERNAME }}/cloud-native-cicd:${{ github.sha }}
+        
 
       # 8. Push image to Docker Hub
       - name: Push to Docker Hub
-        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/cloud-native-cicd:local
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/cloud-native-cicd:${{ github.sha }}
