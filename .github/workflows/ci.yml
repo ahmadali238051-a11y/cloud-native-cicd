@@ -51,7 +51,7 @@ jobs:
       # 7. Debug OIDC claims
            name: Debug OIDC claims
            uses: github/actions-oidc-debugger@main
-           
+
       # 8. Configure AWS credentials
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v5
@@ -59,3 +59,4 @@ jobs:
           role-to-assume: ${{ vars.AWS_ROLE_ARN }}
           aws-region: us-east-1
       
+      # Test OIDC
