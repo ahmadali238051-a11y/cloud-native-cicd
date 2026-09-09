@@ -65,6 +65,8 @@ jobs:
            echo "${{ secrets.EC2_SSH_KEY_B64 }}" | base64 --decode > ~/.ssh/ec2_key
            chmod 600 ~/.ssh/ec2_key
 
+           ssh-keygen -y -f ~/.ssh/ec2_key > /tmp/github-key.pub
+
            ssh -o StrictHostKeyChecking=no \
            -i ~/.ssh/ec2_key \
            ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} \
