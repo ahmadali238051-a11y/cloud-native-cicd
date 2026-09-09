@@ -52,6 +52,7 @@ jobs:
         run: docker push w616/cloud-native-cicd:${{ github.sha }}
 
   deploy-test:
+     needs: test
      runs-on: ubuntu-latest
 
      steps:
