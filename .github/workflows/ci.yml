@@ -59,19 +59,11 @@ jobs:
      runs-on: ubuntu-latest
 
      steps:
-       - name: Validate SSH key
-         run: |
-           mkdir -p ~/.ssh
-
-           echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/ec2_key
-
-           chmod 600 ~/.ssh/ec2_key
-
-           echo "First line:"
-           head -n 1 ~/.ssh/ec2_key
-
-           echo "Last line:"
-           tail -n 1 ~/.ssh/ec2_key
-
-           echo "Testing key:"
-           ssh-keygen -y -f ~/.ssh/ec2_key > /tmp/github-key.pub
+       - name: Test SSH connection
+         uses: appleboy/ssh-action@v1.2.5
+         with:
+           host: ${{ secrets.EC2_HOST }}
+           username: ${{ secrets.EC2_USERNAME }}
+           key: ${{ secrets.EC2_SSH_KEY }}
+           script: |
+             echo "SSH connection successful"
