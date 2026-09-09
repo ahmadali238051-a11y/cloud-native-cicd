@@ -67,3 +67,14 @@ jobs:
            key: ${{ secrets.EC2_SSH_KEY }}
            script: |
              echo "SSH connection successful"
+       - name: Deploy to EC2
+         uses:  appleboy/ssh-action@v1.2.5
+         with:
+           host: ${{ secrets.EC2_HOST }}
+           username: ${{ secrets.EC2_USERNAME }}
+           key: ${{ secrets.EC2_SSH_KEY }}
+           script: |
+             docker pull w616/cloud-native-cicd:latest
+             docker stop cloud-native-api
+             docker rm cloud-native-api
+             docker run -d -p 8000:8000 --name cloud-native-api w616/cloud-native-cicd:latest
