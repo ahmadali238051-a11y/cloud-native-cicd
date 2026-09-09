@@ -72,6 +72,5 @@ jobs:
            key: ${{ secrets.EC2_SSH_KEY }}
            script: |
              sudo docker pull w616/cloud-native-cicd:${{ github.sha }}
-             sudo docker stop cloud-native-api
-             sudo docker rm cloud-native-api
+             sudo docker rm -f cloud-native-api || true
              sudo docker run -d -p 8000:8000 --name cloud-native-api w616/cloud-native-cicd:${{ github.sha }}
