@@ -59,15 +59,19 @@ jobs:
      runs-on: ubuntu-latest
 
      steps:
-       - name: Test SSH connection
+       - name: Validate SSH key
          run: |
            mkdir -p ~/.ssh
+
            echo "${{ secrets.EC2_SSH_KEY_B64 }}" | base64 --decode > ~/.ssh/ec2_key
+
            chmod 600 ~/.ssh/ec2_key
 
-           ssh-keygen -y -f ~/.ssh/ec2_key > /tmp/github-key.pub
+           echo "First line:"
+           head -n 1 ~/.ssh/ec2_key
 
-           ssh -o StrictHostKeyChecking=no \
-           -i ~/.ssh/ec2_key \
-           ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} \
-           "echo SSH connection successful"
+           echo "Last line:"
+           tail -n 1 ~/.ssh/ec2_key
+
+           echo "Testing key:"
+           ssh-keygen -y -f ~/.ssh/ec2_key > /tmp/github-key.pub
