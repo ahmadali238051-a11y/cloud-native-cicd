@@ -56,8 +56,8 @@ jobs:
         run: docker push w616/cloud-native-cicd:latest
 
 deploy-test:
-  runs-on: ubuntu-latest
+   runs-on: ubuntu-latest
 
-  steps:
-    - name: Test SSH connection
-      run: echo "We will connect to EC2 here"
+   steps:
+     - name: Test SSH connection
+       run: echo "We will connect to EC2 here"
